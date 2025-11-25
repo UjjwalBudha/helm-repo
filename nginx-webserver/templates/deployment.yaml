@@ -16,6 +16,44 @@ spec:
     spec:
       containers:
       - name: {{ .Chart.Name }}
-        image: {{ .Values.image }}:{{ .Values.image.tag }}
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
         ports:
         - containerPort: {{ .Values.image.port }}
+k8s/helm/test-project   main  ! ❯ ls                                                                         14:04 
+index.yaml  nginx-0.1.0.tgz  nginx-webserver  README.md
+󰣇 k8s/helm/test-project   main  ! ❯ helm install nginx ./nginx-webserver --dry-run                             14:04 
+level=WARN msg="--dry-run is deprecated and should be replaced with '--dry-run=client'"
+NAME: nginx
+LAST DEPLOYED: Tue Nov 25 14:04:51 2025
+NAMESPACE: default
+STATUS: pending-install
+REVISION: 1
+DESCRIPTION: Dry run complete
+TEST SUITE: None
+HOOKS:
+MANIFEST:
+---
+# Source: nginx/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-nginx
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+
+󰣇 k8s/helm/test-project   main  ! ❯  
