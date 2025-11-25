@@ -1,0 +1,6 @@
+spec:
+  replicas: 3
+image:
+  repository: nginx
+  tag: "latest"
+  port: 80
